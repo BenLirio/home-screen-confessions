@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Screen Confessions &mdash; your 5 most-opened apps, interpreted</title>
+  <meta property="og:title" content="Home Screen Confessions">
+  <meta property="og:description" content="Type the 5 apps you open most. Get a named verdict (The Unemployable Mystic, The Dopamine Accountant) on a brass-etched operator panel.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:wght@500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+  <script src="feedback.js" defer></script>
+</head>
+<body>
+  <main id="app">
+
+    <!-- INTAKE -->
+    <section id="intake" class="screen">
+      <header class="intake-head">
+        <div class="eyebrow">confession panel no. IV</div>
+        <h1 class="title">Home Screen<br><span class="accent">Confessions.</span></h1>
+        <p class="lede">Name the five apps you open most from your phone&rsquo;s home screen. The panel reads them back as a verdict.</p>
+      </header>
+
+      <form id="intake-form" autocomplete="off" novalidate>
+        <label for="apps-log" class="field-label">Five apps &mdash; one per line.</label>
+        <textarea id="apps-log" rows="7" maxlength="400" spellcheck="false"
+          placeholder="Instagram&#10;Notes&#10;Duolingo&#10;Uber Eats&#10;Robinhood"></textarea>
+        <div class="meta-row">
+          <span id="line-count" class="line-count">0 / 5</span>
+          <button type="button" id="sample-btn" class="ghost-btn">use a sample</button>
+        </div>
+
+        <p id="intake-error" class="error hidden" aria-live="polite"></p>
+
+        <button id="submit-btn" type="submit" class="primary-btn">File my confession</button>
+        <p class="disclaimer">For entertainment only. The panel is not a licensed clinician.</p>
+      </form>
+    </section>
+
+    <!-- LOADING -->
+    <section id="loading" class="screen hidden" aria-live="polite">
+      <div class="loader">
+        <div class="loader-dial"><span class="tick"></span><span class="tick"></span><span class="tick"></span><span class="tick"></span></div>
+        <p class="loader-copy" id="loader-copy">consulting the brass panel&hellip;</p>
+        <p class="loader-sub">Cross-referencing your thumbprint against the registry.</p>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section id="result" class="screen hidden">
+      <article id="device" class="device" aria-label="operator panel with home screen">
+        <!-- A stylized fake PDA / brass operator panel -->
+        <div class="device-frame">
+          <div class="device-screws">
+            <span class="screw tl"></span><span class="screw tr"></span>
+            <span class="screw bl"></span><span class="screw br"></span>
+          </div>
+
+          <div class="device-statusbar">
+            <span class="sb-left mono" id="sb-time">9:41</span>
+            <span class="sb-mid">MUNICIPAL PDA &middot; MODEL <span id="sb-model">IV-C</span></span>
+            <span class="sb-right mono" id="sb-serial">0000</span>
+          </div>
+
+          <div class="homescreen">
+            <!-- Five pinned apps arranged around a central brass name plate -->
+            <div class="app-slot a1" data-idx="0"><div class="app-tile"><span class="app-glyph">&#9678;</span></div><div class="app-label"><span id="app-name-0">&mdash;</span></div><div class="micro-label" id="micro-0">&mdash;</div></div>
+            <div class="app-slot a2" data-idx="1"><div class="app-tile"><span class="app-glyph">&#9672;</span></div><div class="app-label"><span id="app-name-1">&mdash;</span></div><div class="micro-label" id="micro-1">&mdash;</div></div>
+
+            <div class="plate">
+              <div class="plate-eyebrow">the panel declares you</div>
+              <div class="plate-name" id="archetype-name">&mdash;</div>
+              <div class="plate-rule"></div>
+              <p class="plate-why" id="archetype-why">&mdash;</p>
+              <div class="plate-foot">
+                <span class="mono" id="plate-date">&mdash;</span>
+                <span class="dot">&middot;</span>
+                <span class="mono" id="plate-id">&mdash;</span>
+              </div>
+            </div>
+
+            <div class="app-slot a3" data-idx="2"><div class="app-tile"><span class="app-glyph">&#9735;</span></div><div class="app-label"><span id="app-name-2">&mdash;</span></div><div class="micro-label" id="micro-2">&mdash;</div></div>
+            <div class="app-slot a4" data-idx="3"><div class="app-tile"><span class="app-glyph">&#9670;</span></div><div class="app-label"><span id="app-name-3">&mdash;</span></div><div class="micro-label" id="micro-3">&mdash;</div></div>
+            <div class="app-slot a5" data-idx="4"><div class="app-tile"><span class="app-glyph">&#9650;</span></div><div class="app-label"><span id="app-name-4">&mdash;</span></div><div class="micro-label" id="micro-4">&mdash;</div></div>
+          </div>
+
+          <div class="device-dock">
+            <span class="dock-dot"></span><span class="dock-dot"></span><span class="dock-dot"></span>
+          </div>
+        </div>
+        <p class="device-stamp mono">registered &middot; confessions bureau</p>
+      </article>
+
+      <div id="share" class="cta-row">
+        <button onclick="share()" class="primary-btn">Share the verdict</button>
+        <button id="reset-btn" type="button" class="secondary-btn">Confess again</button>
+      </div>
+
+      <p class="outro-cta">Curious what the panel says about someone else? <a href="#" id="own-cta">file another confession &rarr;</a></p>
+    </section>
+
+  </main>
+</body>
+</html>
